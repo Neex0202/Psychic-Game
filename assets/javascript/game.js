@@ -18,7 +18,19 @@ var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.l
 
 console.log(computerGuess);
 
+// RNG for new letter
+var rng = function() {
+
+    computerChoices[Math.floor(Math.random() * computerChoices.length)];
+};
+
+
 // Function to reset game
+var reset = function() {
+    guessesLeft = 10;
+    rng();
+};
+
 
 // When user presses a key, this function will execute.
 document.onkeypress = function(event) {
@@ -29,23 +41,33 @@ document.onkeypress = function(event) {
     console.log(userGuess);
     lettersGuessed.push(" " + userGuess);
 
-// 
-    if(userGuess == computerGuess) {
+    // 
+    if (userGuess == computerGuess) {
         wins++;
         alert("winner!");
-    }else {
+        function reset() {
+            guessesLeft=10;
+                function rng() {
+                computerChoices[Math.floor(Math.random() * computerChoices.length)];    
+                }
+            
+        }
+       reset();
+       rng();
+
+    } else {
         guessesLeft--;
     }
 
-    if(guessesLeft == 0) {
-    	losses++;
+    if (guessesLeft == 0) {
+        losses++;
 
-    	function reset(){
-    		wins=0;
-    		losses=0;
-    		guessesLeft = 10;
-    	}
-    	reset(); 	
+        function reset() {
+            guessesLeft = 10;
+            rng();
+
+        }
+        reset();
     }
 
 
@@ -53,14 +75,14 @@ document.onkeypress = function(event) {
 
 
 
-var html = "<p>Guess what letter I'm thinking of</p>" +
-    "<p>wins: " + wins + "</p>" +
-    "<p>losses: " + losses + "</p>" +
-    "<p>guesses left:" + guessesLeft + "</p>" +
-    "<p>Letters guessed:" + lettersGuessed + "</p>";
+    var html = "<p>Guess what letter I'm thinking of</p>" +
+        "<p>wins: " + wins + "</p>" +
+        "<p>losses: " + losses + "</p>" +
+        "<p>guesses left:" + guessesLeft + "</p>" +
+        "<p>Letters guessed:" + lettersGuessed + "</p>";
 
 
-document.querySelector("#game").innerHTML = html;
+    document.querySelector("#game").innerHTML = html;
 
 };
 
@@ -68,11 +90,7 @@ document.querySelector("#game").innerHTML = html;
 
 // var userText = document.getElementById("user-text");
 
-// document.onkeypress = function(event)		{
-// 	userText.textContent = event.key;
+// document.onkeypress = function(event)        {
+//  userText.textContent = event.key;
 
-// 
-
-
-
-
+//
